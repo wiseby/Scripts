@@ -27,23 +27,26 @@ Remote repository not found.
 import os
 import sys
 import subprocess
+import configparser
 
 pythonVersion = 'python3'
 error = 0
 log = ''
 logFile = 'test.log'
+configFile = ''
 gitPull = 'git pull origin master'
-
-if len(sys.argv) > 1:
-    testProgram = str(sys.argv[1])
-
-if len(sys.argv) > 2:
-    remoteRepo = sys.argv[2]
-
+gitHubURL = r'https://github.com/'
 
 def program():
     """ Main Program."""
-    if FindGit:
+
+    if len(sys.argv) > 1:
+        testProgram = str(sys.argv[1])
+
+    if len(sys.argv) > 2:
+        remoteRepo = sys.argv[2]
+
+    if FindFile('.git'):
         git = subprocess.run(gitPull)
         test = subprocess.run(testProgram)
 
@@ -60,19 +63,21 @@ def program():
 
     else:
         error = 1
-    
+
     sys.exit(error)
+
 
 def WriteToLog(data):
     """ Writes stdout and stderr to logfile. """
     with open(logFile, 'a') as f:
         f.write(data)
 
-def FindGit():
+
+def FindFile(file):
     DirectoryList = os.listdir()
 
     for dir in DirectoryList:
-        if dir == '.git':
+        if dir == file:
             return True
 
 if __name__ == '__main__':
