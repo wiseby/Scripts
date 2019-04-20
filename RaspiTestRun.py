@@ -29,13 +29,16 @@ import sys
 import subprocess
 
 pythonVersion = 'python3'
-remoteRepo = sys.argv[1]
-logFile = 'test.log'
-testProgram = str(sys.argv[3])
 error = 0
 log = ''
-
+logFile = 'test.log'
 gitPull = 'git pull origin master'
+
+if len(sys.argv) > 0:
+    testProgram = str(sys.argv[1])
+
+if len(sys.argv) > 1:
+    remoteRepo = sys.argv[2]
 
 
 def program():
