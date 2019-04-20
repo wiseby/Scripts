@@ -1,20 +1,26 @@
-import time
+"""
+Safe backup of all types of usb-devices.
+Plug it in and strat the program. All data will be stored on the server.
 
-prevTime = time.time()
+Big Steps:
 
-counter = 1
-while(True):
-    if (time.time() - prevTime >= 1):
-        print("{}seconds".format(counter))
-        counter += 1
-        prevTime = time.time()
+-   Start program.
+-   When prompted, insert device in USB-port
+-   Wait for finish.
+-   When prompted unplugg device.
+-   Done
 
-    if (counter > 10):
-        break
+Small Steps:
 
-import subprocess
-print('Hello World!')
-print('Hello Again!')
-listDir = subprocess.run("ls")
-
-print(listDir)
+-   Start Program.
+-   When prompted, insert device in USB-port
+-   The device is compared to a list of known devices to determine default 
+    actions. This is accomplished using custom udev rules. 
+    A snapshot of the udev info page was taken before insertion and compared 
+    to one taken after insertion.
+    
+    Things to Verify:
+    -   Backup destination?
+    -   Adding device to be recognized as a default one?
+    -   
+"""
