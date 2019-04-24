@@ -2,16 +2,16 @@
 For running test on a raspberry pi and writing the code on anpther machine.
 When testing the program om the pi it should update from a remote repository
 so the code that has been written on the remote machine gets updated runs.
-The program starts the application in a seperate process and capturing any 
-error.  
+The program starts the application in a seperate process and capturing any
+error.
 
 This Program needs git to run and a remote repository setup with initialized
-.git source. 
+.git source.
 
 Before testing clone the repository to be tested on the pi. Then run program
 from cloned destination.
 
-The program creates a config file where repos and specifik program run 
+The program creates a config file where repos and specifik program run
 characteristics are declared.
 
 git pull origin master
