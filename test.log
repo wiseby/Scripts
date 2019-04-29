@@ -30,4 +30,8 @@ None
 b'Already up to date.\n'
 git stderr
 None
+Program start 2019git stdout
+b'Already up to date.\n'
+git stderr
+None
 

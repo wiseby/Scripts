@@ -56,7 +56,7 @@ def program():
 
     if (FindFile('.git')):
         git = subprocess.run(gitPull, stdout=subprocess.PIPE)
-        if (testProgram not ''):
+        if (testProgram != ''):
             test = subprocess.run(testProgram, stdout=subprocess.PIPE)
             log += str('test stdout\n{0}'.format(str(test.stdout)))
             log += '\n\r'
