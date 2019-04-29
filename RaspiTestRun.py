@@ -30,7 +30,7 @@ import sys
 import subprocess
 import configparser
 
-pythonVersion = 'python3'
+pythonVersion = 'python3.7'
 error = 0
 log = ''
 logFile = 'test.log'
@@ -38,7 +38,7 @@ configFile = ''
 gitPull = ['git', 'pull', 'origin', 'master']
 testProgram = ''
 gitHubURL = r'https://github.com/'
-log = str('Program start {}'.format(time.strftime('%Y')))
+log = str('Program start {}\n'.format(time.strftime('%D | %H:%M')))
 
 
 def program():
@@ -54,18 +54,26 @@ def program():
     if len(sys.argv) > 2:
         remoteRepo = sys.argv[2]
 
-    if (FindFile('.git')):
-        git = subprocess.run(gitPull, stdout=subprocess.PIPE)
-        if (testProgram != ''):
-            test = subprocess.run(testProgram, stdout=subprocess.PIPE)
-            log += str('test stdout\n{0}'.format(str(test.stdout)))
-            log += '\n\r'
-            log += str('test stderr\n{0}'.format(test.stdout))
-            log += '\n\r'
+    testProcess = [pythonVersion, testProgram]
 
+    if (FindFile('.git')):
+        git = subprocess.run(
+            gitPull,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
+    if (testProgram != ''):
+        test = subprocess.run(
+            testProcess,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+            )
+        log += str('test stdout:\n{0}'.format(str(test.stdout)))
+        log += '\n\r'
+        log += str('test stderr:\n{0}'.format(str(test.stdout)))
+        log += '\n\r'
         log += str('git stdout\n{0}'.format(str(git.stdout)))
         log += '\n\r'
-        log += str('git stderr\n{0}'.format(git.stderr))
+        log += str('git stderr\n{0}'.format(str(git.stderr)))
         log += '\n\r'
 
         WriteToLog(log)
