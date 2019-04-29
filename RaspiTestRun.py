@@ -24,6 +24,7 @@ No .git file found.
 Error 2:
 Remote repository not found.
 """
+import time
 import os
 import sys
 import subprocess
@@ -34,11 +35,18 @@ error = 0
 log = ''
 logFile = 'test.log'
 configFile = ''
-gitPull = 'git pull origin master'
+gitPull = ['git', 'pull', 'origin', 'master']
+testProgram = ''
 gitHubURL = r'https://github.com/'
+log = str('Program start {}'.format(time.strftime('%Y')))
+
 
 def program():
     """ Main Program."""
+
+    global log
+    global error
+    global testProgram
 
     if len(sys.argv) > 1:
         testProgram = str(sys.argv[1])
@@ -46,17 +54,18 @@ def program():
     if len(sys.argv) > 2:
         remoteRepo = sys.argv[2]
 
-    if FindFile('.git'):
-        git = subprocess.run(gitPull)
-        test = subprocess.run(testProgram)
+    if (FindFile('.git')):
+        git = subprocess.run(gitPull, stdout=subprocess.PIPE)
+        if (testProgram not ''):
+            test = subprocess.run(testProgram, stdout=subprocess.PIPE)
+            log += str('test stdout\n{0}'.format(str(test.stdout)))
+            log += '\n\r'
+            log += str('test stderr\n{0}'.format(test.stdout))
+            log += '\n\r'
 
-        log = str('git stdout\n{0}'.format(git.stdout))
+        log += str('git stdout\n{0}'.format(str(git.stdout)))
         log += '\n\r'
         log += str('git stderr\n{0}'.format(git.stderr))
-        log += '\n\r'
-        log += str('test stdout\n{0}'.format(test.stdout))
-        log += '\n\r'
-        log += str('test stderr\n{0}'.format(test.stdout))
         log += '\n\r'
 
         WriteToLog(log)
