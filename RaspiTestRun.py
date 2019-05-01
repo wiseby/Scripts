@@ -88,8 +88,9 @@ def program():
 
 def WriteToLog(data):
     """ Writes stdout and stderr to logfile. """
-    with open(logFile, 'a') as f:
-        f.write(data)
+    for line in data:
+        with open(logFile, 'a') as f:
+            f.write(line)
 
 
 def FindFile(file):
