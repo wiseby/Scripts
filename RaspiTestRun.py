@@ -86,7 +86,7 @@ def program():
 
 def WriteToLog(data):
     """ Writes stdout and stderr to logfile. """
-    with open(logFile, 'a') as f:
+    with open(logFile, 'a+t') as f:
         f.write(data)
 
 
