@@ -32,13 +32,13 @@ import configparser
 
 pythonVersion = 'python3.7'
 error = 0
-log = ''
+log = []
 logFile = 'test.log'
 configFile = ''
 gitPull = ['git', 'pull', 'origin', 'master']
 testProgram = ''
 gitHubURL = r'https://github.com/'
-log = 'Program start {}\n'.format(time.strftime('%D | %H:%M'))
+logInit = 'Program start {}\n'.format(time.strftime('%D | %H:%M'))
 
 
 def program():
@@ -47,6 +47,8 @@ def program():
     global log
     global error
     global testProgram
+
+    log.append(logInit)
 
     if len(sys.argv) > 1:
         testProgram = str(sys.argv[1])
@@ -67,14 +69,14 @@ def program():
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
             )
-        log += 'test stdout:\n{0}'.format(test.stdout)
-        log += '\n\r'
-        log += 'test stderr:\n{0}'.format(test.stderr)
-        log += '\n\r'
-        log += 'git stdout\n{0}'.format(git.stdout)
-        log += '\n\r'
-        log += 'git stderr\n{0}'.format(git.stderr)
-        log += '\n\r'
+        log.append('test stdout:\n{0}'.format(test.stdout))
+        log.append('\n\r')
+        log.append('test stderr:\n{0}'.format(test.stderr))
+        log.append('\n\r')
+        log.append('git stdout\n{0}'.format(git.stdout))
+        log.append('\n\r')
+        log.append('git stderr\n{0}'.format(git.stderr))
+        log.append('\n\r')
 
         WriteToLog(log)
 
@@ -86,7 +88,7 @@ def program():
 
 def WriteToLog(data):
     """ Writes stdout and stderr to logfile. """
-    with open(logFile, 'a+t') as f:
+    with open(logFile, 'a') as f:
         f.write(data)
 
 
