@@ -38,7 +38,7 @@ configFile = ''
 gitPull = ['git', 'pull', 'origin', 'master']
 testProgram = ''
 gitHubURL = r'https://github.com/'
-log = str('Program start {}\n'.format(time.strftime('%D | %H:%M')))
+log = 'Program start {}\n'.format(time.strftime('%D | %H:%M'))
 
 
 def program():
@@ -67,13 +67,13 @@ def program():
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
             )
-        log += str('test stdout:\n{0}'.format(str(test.stdout)))
+        log += 'test stdout:\n{0}'.format(test.stdout)
         log += '\n\r'
-        log += str('test stderr:\n{0}'.format(str(test.stdout)))
+        log += 'test stderr:\n{0}'.format(test.stderr)
         log += '\n\r'
-        log += str('git stdout\n{0}'.format(str(git.stdout)))
+        log += 'git stdout\n{0}'.format(git.stdout)
         log += '\n\r'
-        log += str('git stderr\n{0}'.format(str(git.stderr)))
+        log += 'git stderr\n{0}'.format(git.stderr)
         log += '\n\r'
 
         WriteToLog(log)
