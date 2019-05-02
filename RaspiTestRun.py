@@ -62,29 +62,24 @@ def program():
         git = subprocess.run(
             gitPull,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE)
+            stderr=subprocess.PIPE,
+            text=True
+            )
     if (testProgram != ''):
         test = subprocess.run(
             testProcess,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
+            text=True
             )
 
-        gitStderr = ''
-
-        for i in git.stderr:
-            text = i.decode("unicode")
-            gitStderr.join(text)
-
+        log.append('git stdout\n{0}'.format(git.stdout))
+        log.append('\n\r')
+        log.append('git stderr\n{0}'.format(git.stderr))
+        log.append('\n\r')
         log.append('test stdout:\n{0}'.format(test.stdout))
         log.append('\n\r')
         log.append('test stderr:\n{0}'.format(test.stderr))
-        log.append('\n\r')
-        log.append('git stdout\n')
-        for i in git.stdout:
-            log.append(i.decode('unicode'))
-        log.append('\n\r')
-        log.append('git stderr\n{0}'.format((gitStderr)))
         log.append('\n\r')
 
         WriteToLog(log)
