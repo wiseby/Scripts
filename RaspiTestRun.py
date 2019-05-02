@@ -21,6 +21,9 @@ saves messages to a file as a testlog.
 Error 1:
 No .git file found.
 
+This should be the part where you have the option to add this and sync to a 
+repository of your choosing.
+
 Error 2:
 Remote repository not found.
 """
@@ -28,7 +31,6 @@ import time
 import os
 import sys
 import subprocess
-import configparser
 
 pythonVersion = 'python3.7'
 error = 0
