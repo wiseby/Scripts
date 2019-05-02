@@ -1,19 +1,18 @@
 import subprocess
 
-ipconfig = subprocess.run('ipconfig', capture_output=True)
+ipconfig = subprocess.run(
+    'ipconfig',
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE
+    )
 
-str1 = 'Hello your little rascal. Give me some sugar!'
-str2 = ''
-ipconfigLines = str1.split('. ')
+networkInfo = ''
 
-networkInfo = ipconfig.stdout
-networkInfo.decode
+for lines in ipconfig.stdout:
+    text = lines.decode("unicode")
+    networkInfo.join()
+
 networkInfo.replace('W', '', 1)
 print(networkInfo)
 
-print()
-
-print(str1)
-print(ipconfigLines)
-for lines in ipconfigLines:
-    print(lines)
+print(networkInfo)
